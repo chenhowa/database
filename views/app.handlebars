@@ -1,0 +1,248 @@
+<article>
+	<h1>Your Name Database (Howard Chen)</h1>
+	
+	<table border=1 id="filterTable">
+		<caption>Relations Display</caption>
+		<thead id="filterHead"> </thead>
+		<tbody id="filterBody"> </tbody>
+	
+	</table>
+	
+	<div class="entities col">
+		<section>
+			<table border=1 id="characters">
+				<caption>Characters</caption>
+				<thead id="characters">
+					<th class="tcol">charID</th>
+					<th class="tcol">firstName</th>
+					<th class="tcol">lastName</th>
+					<th class="tcol">age</th>
+					<th class="tcol fk city">cityFID</th>
+				</thead>
+				<tbody id="charBody">
+
+				</tbody>
+			</table>
+			<form>
+				<fieldset>
+					<legend>Filter By Character Age: </legend>
+					<select id="selectAgeFilter">
+						<option value="None"> None </option>
+						<option id="ageLess30" value="30">age less than </option>
+						<option id="ageLess50" value="50">age less than 50 </option>			
+					</select>
+					<input type="submit" value="Filter" id="submitAgeFilter">
+				</fieldset>
+				<fieldset>
+					<legend>Character is related to...</legend>
+					<select id="charChoice">
+					
+					</select>
+					<select id="charRel">
+						<option value="charExistsTime"> exists in ...(time) </option>
+						<option value="charDirectCharTime"> is direct friends with ... (character)(time) </option>
+						<option value="charSwitchCharTime"> is switched friends with ... (character)(time) </option>
+						<option value="charHasTitleTime"> has ... (titles)(time) </option>
+					</select>
+					<input type="submit" value="Find Related" id="submitCharRel">
+				</fieldset>
+			</form>
+		</section>
+		
+		<section>
+			<table border=1 id="city">
+				<caption>Cities</caption>
+				<thead id="city">
+					<th class="tcol">cityID</th>
+					<th class="tcol">city_name</th>
+					<th class="tcol">population</th>
+					<th class="tcol">country</th>
+				</thead>
+
+				<tbody id="cityBody">
+
+				</tbody>
+			</table>
+			<form>
+				<fieldset>
+					<legend>Filter By City Name: </legend>
+					City Name: <input type="text" value="City Name" id="searchCityName">
+					<input type="submit" value="Filter" id="submitCityName">
+				</fieldset>
+				<fieldset>
+					<legend>City is related to...</legend>
+					<select id="cityChoice">
+					
+					</select>
+					<select id="cityRel">
+						<option value="characters">is the hometown of ... (character)</option>
+						<option value="building">is the location of ... (building) </option>
+						<option value="cityExistsTime">exists in ...(time) </option>
+					</select>
+					<input type="submit" value="Find Related" id="submitCityRel">
+					
+				</fieldset>
+			</form>
+		</section>
+		
+		<section>
+			<table border=1 id="building">
+				<caption>Buildings</caption>
+				<thead id="building">
+					<th class="tcol">buildID</th>
+					<th class="tcol">build_name</th>
+					<th class="tcol">squareFeet</th>
+					<th class="tcol">levels</th>
+					<th class="tcol fk city">cityFID</th>
+				</thead>
+
+				<tbody id="buildingBody">
+
+				</tbody>
+			</table>
+			<form>
+				<fieldset>
+					<legend> Building is related to... </legend>
+					<select id="buildChoice">
+						
+					</select>
+					<select id="buildRel">
+						<option value="buildingExistsTime">exists in ... (time)</option>
+					</select id="buildRel">
+					<input type="submit" value="Find Related" id="submitBuildRel">
+				</fieldset>
+			</form>
+		</section>
+		
+		<section>
+			<table border=1 id="title">
+				<caption>Titles</caption>
+				<thead id="title">
+					<th class="tcol">titleID</th>
+					<th class="tcol">title_name</th>
+				</thead>
+
+				<tbody id="titleBody">
+
+				</tbody>
+			</table>
+		</section>
+		
+		<section>
+			<table border=1 id="times">
+				<caption>Time Periods</caption>
+				<thead id="times">
+					<th class="tcol">timeID</th>
+					<th class="tcol date">start</th>
+					<th class="tcol date">end</th>
+				</thead>
+
+				<tbody id="timesBody">
+
+				</tbody>
+			</table>
+		</section>
+	</div>
+	
+	
+	<div class="rels col">
+		<section>
+			<table border=1 id="charExistsTime">
+				<caption>Char Exists in Time Period</caption>
+				<thead>
+					<th class="tcol">rowID</th>
+					<th class="tcol fk characters">charID</th>
+					<th class="tcol fk times">timeID</th>
+				</thead>
+
+				<tbody id="charExistsTimesBody">
+
+				</tbody>
+			</table>
+		</section>
+		
+		<section>
+			<table border=1 id="charDirectCharTime">
+				<caption>Char Direct Friendship</caption>
+				<thead>
+					<th class="tcol">rowID</th>
+					<th class="tcol fk characters">cid1</th>
+					<th class="tcol fk characters">cid2</th>
+					<th class="tcol fk times">timeID</th>
+				</thead>
+
+				<tbody id="charDirectCharBody">
+
+				</tbody>
+			</table>
+		</section>
+		
+		<section>
+			<table border=1 id="charSwitchCharTime">
+				<caption>Char Switch Friendships</caption>
+				<thead>
+					<th class="tcol">rowID</th>
+					<th class="tcol fk characters">switcherID</th>
+					<th class="tcol fk characters">cid</th>
+					<th class="tcol fk times">timeID</th>
+				</thead>
+
+				<tbody id="charSwitchCharTimesBody">
+
+				</tbody>
+			</table>
+		</section>
+		
+		<section>
+			<table border=1 id="buildingExistsTime">
+				<caption>Building Exists in Time Period</caption>
+				<thead>
+					<th class="tcol">rowID</th>
+					<th class="tcol fk building">buildID</th>
+					<th class="tcol fk times">timeID</th>
+				</thead>
+
+				<tbody id="buildingExistsTimesBody">
+
+				</tbody>
+			</table>
+		</section>
+		
+		<section>
+			<table border=1 id="cityExistsTime">
+				<caption>City Exists in Time Period</caption>
+				<thead>
+					<th class="tcol">rowID</th>
+					<th class="tcol fk city">cityID</th>
+					<th class="tcol fk times">timeID</th>
+				</thead>
+
+				<tbody id="cityExistsTimesBody">
+
+				</tbody>
+			</table>
+		</section>
+		
+		<section>
+			<table border=1 id="charHasTitleTime">
+				<caption>Char Has Title in Time Period</caption>
+				<thead>
+					<th class="tcol">rowID</th>
+					<th class="tcol fk characters">charID</th>
+					<th class="tcol fk title">titleID</th>
+					<th class="tcol fk times">timeID</th>
+				</thead>
+
+				<tbody id="charHasTitleTimesBody">
+
+				</tbody>
+			</table>
+		</section>
+	</div>
+	
+	
+	
+</article>
+
+
+{{{script}}}
